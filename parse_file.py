@@ -16,6 +16,7 @@ def parse(link):
     time.sleep(5)
 
     restaurantName = driver.find_element(By.CSS_SELECTOR, "head > title").get_attribute("innerText")
+    restaurantName = restaurantName.replace(" - self-service in your device by ORTY", "")
 
     windowHeight = driver.execute_script("return document.body.scrollHeight")
 
@@ -39,7 +40,7 @@ def parse(link):
     body = driver.find_element(By.CSS_SELECTOR, 'body')
     for i in range(int(windowHeight / 40) + 1):
         body.send_keys(Keys.ARROW_DOWN)
-        time.sleep(0.01)
+        time.sleep(0.03)
 
     # counter of not successful elements
     notSuccessful = 0
