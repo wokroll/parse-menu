@@ -6,7 +6,11 @@ from sqlalchemy import select
 
 def fill_database(link):
 
-    restaurantName, productsData = parse(link)
+    try:
+        restaurantName, productsData = parse(link)
+    except TypeError:
+        print("No restaurant by link")
+        return
 
     for i in productsData:
         exists = select(dishes)\

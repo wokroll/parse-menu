@@ -34,6 +34,10 @@ def parse(link):
     """
 
     allIds = driver.execute_script(jsGetProductsData)
+    if len(allIds) == 0:
+        return None
+    print(len(allIds))
+
     iterator = 0
     productsData = {}
 
