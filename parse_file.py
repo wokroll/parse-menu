@@ -58,8 +58,19 @@ def parse(link):
                                       'price': productPrice
                                       }
         except NoSuchElementException:
-            notSuccessful += 1
-            print("No such element")
+            try:
+                productNameXPath = "//*[@id='" + productId + "']/div/div[1]/span/h3"
+                productName = driver.find_element(By.XPATH, productNameXPath).text
+
+                productPriceXPath = "//*[@id='" + productId + "']/div/div[2]/div/p/span"
+                productPrice = driver.find_element(By.XPATH, productPriceXPath).get_attribute("innerHTML")
+
+                productsData[iterator] = {'name': productName,
+                                          'price': productPrice
+                                          }
+            except NoSuchElementException:
+                notSuccessful += 1
+                print("No such element")
 
         iterator += 1
 
