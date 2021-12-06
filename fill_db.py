@@ -24,7 +24,8 @@ def fill_database(link):
         if not exists:
             stmt = insert(dishes).values(name=productsData[i]['name'],
                                          price=productsData[i]['price'],
-                                         restaurant=restaurantName)
+                                         restaurant=restaurantName,
+                                         restaurant_link=link)
 
             with engine.connect() as conn:
                 conn.execute(stmt)

@@ -12,10 +12,8 @@ dishes = Table(
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('name', String(50)),
     Column('price', String(10)),
-    Column('restaurant', String(50))
+    Column('restaurant', String(50)),
+    Column('restaurant_link', String(35))
 )
 
 metadata_obj.create_all(engine)
-
-# Session = sessionmaker(bind = engine)
-# session = Session()

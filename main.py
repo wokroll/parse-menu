@@ -1,4 +1,4 @@
-from fill_db import fill_database
+from iterate_restaurants import restaurants_loop
 
 possiblePages = ["https://opc.orty.io/?mid=6524",
                  "https://opc.orty.io/?mid=5763",
@@ -6,5 +6,4 @@ possiblePages = ["https://opc.orty.io/?mid=6524",
                  "https://opc.orty.io/?mid=2617"]
 
 if __name__ == '__main__':
-    for restaurant in possiblePages:
-        fill_database(restaurant)
+    restaurants_loop(1000,1000)

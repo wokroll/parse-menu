@@ -13,7 +13,7 @@ def parse(link):
 
     driver.get(link)
 
-    time.sleep(5)
+    time.sleep(2)
 
     restaurantName = driver.find_element(By.CSS_SELECTOR, "head > title").get_attribute("innerText")
     restaurantName = restaurantName.replace(" - self-service in your device by ORTY", "")
@@ -36,7 +36,6 @@ def parse(link):
     allIds = driver.execute_script(jsGetProductsData)
     if len(allIds) == 0:
         return None
-    print(len(allIds))
 
     iterator = 0
     productsData = {}
