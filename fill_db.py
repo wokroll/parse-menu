@@ -1,6 +1,7 @@
 from db_create import dishes, engine
 from parse_file import parse
 from sqlalchemy import insert
+from sqlalchemy import select
 
 
 def fill_database(link):
@@ -8,9 +9,18 @@ def fill_database(link):
     restaurantName, productsData = parse(link)
 
     for i in productsData:
-        stmt = insert(dishes).values(name=productsData[i]['name'],
-                                     price=productsData[i]['price'],
-                                     restaurant=restaurantName)
+        exists = select(dishes)\
+            .where(dishes.c.name == productsData[i]['name'])\
+            .where(dishes.c.price == productsData[i]['price'])\
+            .where(dishes.c.restaurant == restaurantName)
 
         with engine.connect() as conn:
-            conn.execute(stmt)
+            exists = bool(conn.execute(exists).first())
+
+        if not exists:
+            stmt = insert(dishes).values(name=productsData[i]['name'],
+                                         price=productsData[i]['price'],
+                                         restaurant=restaurantName)
+
+            with engine.connect() as conn:
+                conn.execute(stmt)
